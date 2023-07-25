@@ -83,6 +83,6 @@ To additionally let in HTTPS traffic, allow the Nginx Full profile and delete th
 
 Certbot provides a variety of ways to obtain SSL certificates through plugins. The Nginx plugin will take care of reconfiguring Nginx and reloading the config whenever necessary. To use this plugin, type the following:
 
-```sudo certbot --nginx -d```
+```sudo certbot --nginx```
 
 Select the domain names you want to secure, enter your email, press "yes"

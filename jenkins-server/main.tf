@@ -40,6 +40,14 @@ resource "aws_security_group_rule" "ingress22" {
   security_group_id = aws_security_group.jenkins_sg.id
 }
 
+resource "aws_security_group_rule" "ingress22home" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = var.home-network
+  security_group_id = aws_security_group.jenkins_sg.id
+}
 
 resource "aws_security_group_rule" "ingress80" {
   type              = "ingress"
@@ -55,7 +63,7 @@ resource "aws_security_group_rule" "ingress8080" {
   from_port         = 8080
   to_port           = 8080
   protocol          = "tcp"
-  cidr_blocks       = var.akumo-network
+  cidr_blocks       = var.home-network
   security_group_id = aws_security_group.jenkins_sg.id
 }
 

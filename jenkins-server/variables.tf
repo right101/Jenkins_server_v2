@@ -30,6 +30,6 @@ variable "jenkins_a_record" {
 }
 
 
+variable "home-network" {
 
-
-
+}

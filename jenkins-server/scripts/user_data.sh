@@ -15,3 +15,6 @@ sleep 5
 sudo apt install jenkins -y
 sudo systemctl enable --now jenkins
 sudo ufw allow 8080 
+sudo ufw allow OpenSSH
+sudo ufw enable
+

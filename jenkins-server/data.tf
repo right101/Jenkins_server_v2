@@ -37,3 +37,23 @@ data "template_file" "user_data" {
 data "aws_route53_zone" "my_hosted_zone" {
   name = "baursaq-restaurant.link."
 }
+
+data "aws_iam_policy_document" "assume_role_policy" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type        = "Service"
+      identifiers = ["ec2.amazonaws.com"]
+    }
+  }
+}
+
+
+data "aws_iam_policy_document" "ec2_full_access_policy" {
+  statement {
+    actions   = ["ec2:*"]
+    resources = ["*"]
+    effect    = "Allow"
+  }
+}

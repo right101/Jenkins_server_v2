@@ -4,6 +4,7 @@ resource "aws_instance" "myInstance" {
   subnet_id              = data.aws_subnets.us-east-2_default_subnets.ids[1]
   vpc_security_group_ids = [aws_security_group.jenkins_sg.id]
   key_name               = var.key_name
+  iam_instance_profile   = aws_iam_instance_profile.ec2_profile.name
   #   user_data              = file("${path.module}/scripts/configure_jenkins.yml")
   user_data = data.template_file.user_data.rendered
   root_block_device {
@@ -67,12 +68,12 @@ resource "aws_security_group_rule" "ingress8080" {
   security_group_id = aws_security_group.jenkins_sg.id
 }
 
-resource "aws_security_group_rule" "ingress443" {
+resource "aws_security_group_rule" "ingressHTTPS" {
   type              = "ingress"
   from_port         = 443
   to_port           = 443
   protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
+  cidr_blocks       = var.https_cidr
   security_group_id = aws_security_group.jenkins_sg.id
 }
 
@@ -95,6 +96,14 @@ resource "aws_security_group_rule" "engress80" {
   security_group_id = aws_security_group.jenkins_sg.id
 }
 
+resource "aws_security_group_rule" "engress22" {
+  type              = "egress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.jenkins_sg.id
+}
 
 resource "aws_route53_record" "jenkins" {
   zone_id = data.aws_route53_zone.my_hosted_zone.id
@@ -111,3 +120,5 @@ resource "aws_route53_record" "www_jenkins" {
   ttl     = "300"
   records = [aws_instance.myInstance.public_ip]
 }
+
+

@@ -41,14 +41,6 @@ resource "aws_security_group_rule" "ingress22" {
   security_group_id = aws_security_group.jenkins_sg.id
 }
 
-resource "aws_security_group_rule" "ingress22home" {
-  type              = "ingress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
-  cidr_blocks       = var.home-network
-  security_group_id = aws_security_group.jenkins_sg.id
-}
 
 resource "aws_security_group_rule" "ingress80" {
   type              = "ingress"
@@ -56,15 +48,6 @@ resource "aws_security_group_rule" "ingress80" {
   to_port           = 80
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.jenkins_sg.id
-}
-
-resource "aws_security_group_rule" "ingress8080" {
-  type              = "ingress"
-  from_port         = 8080
-  to_port           = 8080
-  protocol          = "tcp"
-  cidr_blocks       = var.home-network
   security_group_id = aws_security_group.jenkins_sg.id
 }
 
@@ -107,7 +90,7 @@ resource "aws_security_group_rule" "engress22" {
 
 resource "aws_route53_record" "jenkins" {
   zone_id = data.aws_route53_zone.my_hosted_zone.id
-  name    = "www.jenkins."
+  name    = "www.jenkins.creativeunicorn.net"
   type    = "A"
   ttl     = "300"
   records = [aws_instance.myInstance.public_ip]
@@ -115,7 +98,7 @@ resource "aws_route53_record" "jenkins" {
 
 resource "aws_route53_record" "www_jenkins" {
   zone_id = data.aws_route53_zone.my_hosted_zone.id
-  name    = "jenkins."
+  name    = "jenkins.creativeunicorn.net"
   type    = "A"
   ttl     = "300"
   records = [aws_instance.myInstance.public_ip]

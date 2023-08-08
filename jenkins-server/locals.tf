@@ -1,10 +1,10 @@
 locals {
   common_tags = {
     ManagedBy = "Terraform"
-    Owner     = "gulnaz01.01@mail.ru"
-    GitUrl    = "git@github.com:Gulnazzholshy01"
+    Owner     = "raya.mogilev@gmail.com"
+    GitUrl    = "git@github.com:right101"
     Team      = "DevOps"
     Env       = "Prod"
-    Purpose   = "Jenkins Class"
+    Purpose   = "Jenkins"
   }
 }

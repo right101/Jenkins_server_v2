@@ -20,7 +20,7 @@ variable "akumo-network" {
 
 
 variable "ami" {
-  default = "ami-024e6efaf93d85776"
+  
 }
 
 variable "root_volume_size" {
@@ -29,11 +29,7 @@ variable "root_volume_size" {
 variable "jenkins_a_record" {
 }
 
-
-variable "home-network" {
-
-}
-
 variable "https_cidr" {
-  type = list(string)
+  
 }
+

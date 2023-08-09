@@ -20,70 +20,30 @@ resource "aws_instance" "myInstance" {
   )
 }
 
-
-
 resource "aws_security_group" "jenkins_sg" {
   name        = "allow_web"
-  description = "allow ports 22,80"
+  description = "allow ports"
   vpc_id      = data.aws_vpc.default_vpc.id
   tags = {
     Name = "jenkins-sg"
   }
 }
 
-
-resource "aws_security_group_rule" "ingress22" {
+resource "aws_security_group_rule" "ingress" {
+  count             = length(var.ports)
   type              = "ingress"
-  from_port         = 22
-  to_port           = 22
+  from_port         = element(var.ports, count.index) #22, 80, 8080, 443
+  to_port           = element(var.ports, count.index) #22, 80, 8080, 443
   protocol          = "tcp"
   cidr_blocks       = var.network
   security_group_id = aws_security_group.jenkins_sg.id
 }
 
-
-resource "aws_security_group_rule" "ingress80" {
-  type              = "ingress"
-  from_port         = 80
-  to_port           = 80
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.jenkins_sg.id
-}
-
-resource "aws_security_group_rule" "ingressHTTPS" {
-  type              = "ingress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = var.https_cidr
-  security_group_id = aws_security_group.jenkins_sg.id
-}
-
-
-resource "aws_security_group_rule" "engress443" {
+resource "aws_security_group_rule" "engress" {
   type              = "egress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.jenkins_sg.id
-}
-
-resource "aws_security_group_rule" "engress80" {
-  type              = "egress"
-  from_port         = 80
-  to_port           = 80
-  protocol          = "tcp"
-  cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.jenkins_sg.id
-}
-
-resource "aws_security_group_rule" "engress22" {
-  type              = "egress"
-  from_port         = 22
-  to_port           = 22
-  protocol          = "tcp"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.jenkins_sg.id
 }
@@ -103,5 +63,3 @@ resource "aws_route53_record" "www_jenkins" {
   ttl     = "300"
   records = [aws_instance.myInstance.public_ip]
 }
-
-

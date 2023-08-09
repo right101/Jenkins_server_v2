@@ -20,7 +20,7 @@ variable "network" {
 
 
 variable "ami" {
-  
+
 }
 
 variable "root_volume_size" {
@@ -30,6 +30,6 @@ variable "jenkins_a_record" {
 }
 
 variable "https_cidr" {
-  
+
 }
 

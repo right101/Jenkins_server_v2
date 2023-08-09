@@ -90,7 +90,7 @@ resource "aws_security_group_rule" "engress22" {
 
 resource "aws_route53_record" "jenkins" {
   zone_id = data.aws_route53_zone.my_hosted_zone.id
-  name    = "www.jenkins.creativeunicorn.net"
+  name    = "www.creativeunicorn.net"
   type    = "A"
   ttl     = "300"
   records = [aws_instance.myInstance.public_ip]
@@ -98,7 +98,7 @@ resource "aws_route53_record" "jenkins" {
 
 resource "aws_route53_record" "www_jenkins" {
   zone_id = data.aws_route53_zone.my_hosted_zone.id
-  name    = "jenkins.creativeunicorn.net"
+  name    = "creativeunicorn.net"
   type    = "A"
   ttl     = "300"
   records = [aws_instance.myInstance.public_ip]

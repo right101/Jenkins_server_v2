@@ -1,4 +1,4 @@
-# Jenkins
+# Jenkins 
 after Jenkins is installed, need to visit http://public_ip:8080
 from there proceed to next step:
 cat /var/lib/jenkins/secrets/initialAdminPassword

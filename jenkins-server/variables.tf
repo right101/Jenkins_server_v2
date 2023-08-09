@@ -13,8 +13,8 @@ variable "instance_name" {
   type        = string
 }
 
-variable "akumo-network" {
-  description = "AkumoNetwork"
+variable "network" {
+  description = "network"
   type        = list(string)
 }
 

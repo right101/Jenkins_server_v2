@@ -37,7 +37,7 @@ resource "aws_security_group_rule" "ingress22" {
   from_port         = 22
   to_port           = 22
   protocol          = "tcp"
-  cidr_blocks       = var.akumo-network
+  cidr_blocks       = var.network
   security_group_id = aws_security_group.jenkins_sg.id
 }
 

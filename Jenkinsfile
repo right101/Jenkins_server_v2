@@ -21,6 +21,6 @@ pipeline {
             steps {
                  sh 'hostnamectl'
                  }
-        } 
+        }  
     } 
 }  

@@ -9,7 +9,7 @@ pipeline {
         }
         stage('memory_usage') { 
             steps {
-                sh 'free -m'
+                sh 'free -m' 
             }
         }
         stage('hostname') {

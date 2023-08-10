@@ -19,7 +19,7 @@ pipeline {
         }
         stage('OS_info') {
             steps {
-                 sh 'hostnamectl'
+                 sh 'echo hello world'
                  }   
         }     
     }    
